@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  url String   @unique // l'url du projet en prod
+  stacks String
+  visible Boolean
+}
+
+// le model qui represnete l'experience professionnelle
+model ProExp {
+  id Int @id @default(autoincrement())
+  ogarnization_name String // le nom de l'entreprise ou de l'organisation ou l'experience a ete realise
+  job_title String // le poste occupé
+  description String ? // les missions effectue dans cette entreprise
+  begin_date DateTime // date de debut du travail
+  end_date DateTime // date de fin
+  city String // la ville ou le travail a ete effectue
+  country String // le pays ou le travail a ete effectue
+  remote Boolean // pour specifier si le travail s'est fait a distance
+}
+
+// model qui reprenste les technos que j'utilise
+model Stack {
+  id Int @id @default(autoincrement())
+  name String
+  level String // mon niveau de maitrise de la stack ie debutant intermeddiaire avance ou expert
+}
+
+// le model qui represnte mon contact ie comme me contacter
+model Contact {
+  id Int @id @default(autoincrement())
+  typ String // represente le contact ie whatsapp, linkedin, github ou gmail
+  link String // le lien vers le contact ie quand on clique 
+  text String // le texte du contact ie le numero de tel(dans le cas de whatsapp) , le nom (dans le cas de linkedin ou github ou encore gmail)
+}
