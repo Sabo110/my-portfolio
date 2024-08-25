@@ -19,7 +19,7 @@ export default function Administration({ children }: { children: React.ReactNode
         { text: 'Admininstration', link: '/administration' },
         { text: 'Project', link: '/administration/project' },
         { text: 'Stack', link: '/administration/stack' },
-        { text: 'proExp', link: 'administration/pro_exp' },
+        { text: 'proExp', link: '/administration/pro_exp' },
         { text: 'Contact', link: '/administration/contact' }
     ]
     return (
