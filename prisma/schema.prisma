@@ -42,7 +42,8 @@ model Stack {
 // le model qui represnte mon contact ie comme me contacter
 model Contact {
   id Int @id @default(autoincrement())
-  typ String // represente le contact ie whatsapp, linkedin, github ou gmail
-  link String // le lien vers le contact ie quand on clique 
+  typ String @unique // represente le contact ie whatsapp, linkedin, github ou gmail
+  link String @unique // le lien vers le contact ie quand on clique 
   text String // le texte du contact ie le numero de tel(dans le cas de whatsapp) , le nom (dans le cas de linkedin ou github ou encore gmail)
+  // le text n'est pas unique car on peut avoir deux reseau dans lequel on a le meme nom
 }

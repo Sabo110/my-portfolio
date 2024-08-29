@@ -1,5 +1,8 @@
 import Administration from "../layouts/Administration"
 import "../globals.css";
+import ReactQueryProvider from "../components/ReactQueryProvider";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Toaster } from 'sonner';
 
 export const metadata = {
   title: 'Next.js',
@@ -14,9 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Administration>
-          {children}
-        </Administration>
+        <ReactQueryProvider>
+          <Administration>
+            {children}
+          </Administration>
+          <Toaster />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </ReactQueryProvider>
       </body>
     </html>
   )

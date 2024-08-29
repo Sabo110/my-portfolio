@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { forwardRef } from 'react';
 import { IoMdAddCircleOutline } from "react-icons/io";
 
-export default function AddIcon({className}: {className?: string}) {
+const AddIcon = forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>((props, ref) => {
   return (
-    <IoMdAddCircleOutline className={className}/>
-  )
-}
+    <span ref={ref} {...props}>
+      <IoMdAddCircleOutline />
+    </span>
+  );
+});
+
+export default AddIcon;
+
+

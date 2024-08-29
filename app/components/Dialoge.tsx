@@ -8,7 +8,7 @@ export default function Dialoge({children, title, action}: {children: React.Reac
             <DialogTrigger asChild>
                 {action}
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] w-full">
                 <DialogHeader>
                     <DialogTitle> {title} </DialogTitle>
                     <DialogDescription>
