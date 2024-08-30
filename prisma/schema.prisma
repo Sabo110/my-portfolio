@@ -35,7 +35,7 @@ model ProExp {
 // model qui reprenste les technos que j'utilise
 model Stack {
   id Int @id @default(autoincrement())
-  name String
+  name String @unique
   level String // mon niveau de maitrise de la stack ie debutant intermeddiaire avance ou expert
 }
 
