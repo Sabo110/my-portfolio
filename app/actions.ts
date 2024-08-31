@@ -4,6 +4,7 @@ import prisma from './db'
 import { Prisma } from '@prisma/client'
 import { Stack } from './types/Stack'
 import { ProExp } from './types/ProExp'
+import { Project } from './types/Project'
 
 //contact actions
 export async function addContact(data: Omit<Contact, 'id'>) {
@@ -158,7 +159,7 @@ export async function addProExp(proExp: Omit<ProExp, 'id'>) {
         await prisma.proExp.create({
             data: proExp
         })
-        return {message: 'created successfuly'}
+        return { message: 'created successfuly' }
     } catch (error) {
         throw new Error('Internal server error')
     }
@@ -166,10 +167,10 @@ export async function addProExp(proExp: Omit<ProExp, 'id'>) {
 export async function updateProExp(id: number, proExp: Omit<ProExp, 'id'>) {
     try {
         await prisma.proExp.update({
-            where: {id: id},
+            where: { id: id },
             data: proExp
         })
-        return {message: 'updated successfuly'}
+        return { message: 'updated successfuly' }
     } catch (error) {
         throw new Error('Internal server error')
     }
@@ -177,9 +178,60 @@ export async function updateProExp(id: number, proExp: Omit<ProExp, 'id'>) {
 export async function deleteProExp(id: number) {
     try {
         await prisma.proExp.delete({
+            where: { id: id }
+        })
+        return { message: 'deleted succesfuly' }
+    } catch (error) {
+        throw new Error('Internal server error')
+    }
+}
+
+// project actions
+export async function getProjects() {
+    try {
+        const projects = await prisma.project.findMany()
+        return projects
+    } catch (error) {
+        throw new Error('Internal server error')
+    }
+}
+export async function addProject(data: Omit<Project, 'id'>) {
+    try {
+        await prisma.project.create({
+            data: data
+        })
+        return { message: 'created successfuly' }
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === 'P2002') {
+                throw new Error('this url already exists in data base')
+            }
+        }
+        throw new Error('Internal server error')
+    }
+}
+export async function updateProject(id: number, data: Omit<Project, 'id'>) {
+    try {
+        await prisma.project.update({
+            where: { id: id },
+            data: data
+        })
+        return { message: 'updated successfuly' }
+    } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === 'P2002') {
+                throw new Error('this url already exists in data base')
+            }
+        }
+        throw new Error('Internal server error')
+    }
+}
+export async function deleteProject(id: number) {
+    try {
+        await prisma.project.delete({
             where: {id: id}
         })
-        return {message: 'deleted succesfuly'}
+        return {message: 'deleted successfuly'}
     } catch (error) {
         throw new Error('Internal server error')
     }
