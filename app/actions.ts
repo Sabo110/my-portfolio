@@ -1,9 +1,9 @@
 'use server'
-
-import { Contact } from '@prisma/client'
+import { Contact } from './types/Contact'
 import prisma from './db'
 import { Prisma } from '@prisma/client'
 import { Stack } from './types/Stack'
+import { ProExp } from './types/ProExp'
 
 //contact actions
 export async function addContact(data: Omit<Contact, 'id'>) {
@@ -64,11 +64,6 @@ export async function deleteContact(id: number) {
         })
         return { message: 'deleted successfuly' }
     } catch (error) {
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            if (error.code === "P2025") {
-                throw new Error('contact not found , cannot deleted')
-            }
-        }
         throw new Error('Internal server error')
     }
 }
@@ -145,11 +140,48 @@ export async function deleteStack(id: number) {
         })
         return { message: 'deleted successfuly' }
     } catch (error) {
-        if (error instanceof Prisma.PrismaClientKnownRequestError) {
-            if (error.code === "P2025") {
-                throw new Error('stack not found , cannot deleted')
-            }
-        }
         throw new Error('Internal server error')
     }
 }
+
+// pro_exp actions
+export async function getProExps() {
+    try {
+        const proExps = await prisma.proExp.findMany()
+        return proExps
+    } catch (error) {
+        throw new Error('Internal server error')
+    }
+}
+export async function addProExp(proExp: Omit<ProExp, 'id'>) {
+    try {
+        await prisma.proExp.create({
+            data: proExp
+        })
+        return {message: 'created successfuly'}
+    } catch (error) {
+        throw new Error('Internal server error')
+    }
+}
+export async function updateProExp(id: number, proExp: Omit<ProExp, 'id'>) {
+    try {
+        await prisma.proExp.update({
+            where: {id: id},
+            data: proExp
+        })
+        return {message: 'updated successfuly'}
+    } catch (error) {
+        throw new Error('Internal server error')
+    }
+}
+export async function deleteProExp(id: number) {
+    try {
+        await prisma.proExp.delete({
+            where: {id: id}
+        })
+        return {message: 'deleted succesfuly'}
+    } catch (error) {
+        throw new Error('Internal server error')
+    }
+}
+
