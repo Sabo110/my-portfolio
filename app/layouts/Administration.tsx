@@ -16,11 +16,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 export default function Administration({ children }: { children: React.ReactNode }) {
     // les menus de navigation entre differente page
     const navLinks = [
-        { text: 'Admininstration', link: '/administration' },
-        { text: 'Project', link: '/administration/project' },
-        { text: 'Stack', link: '/administration/stack' },
-        { text: 'proExp', link: '/administration/pro_exp' },
-        { text: 'Contact', link: '/administration/contact' }
+        { text: 'Admininstration', link: '/administration?secretkey=' + process.env.YOBA_KEY },
+        { text: 'Project', link: '/administration/project?secretkey='+ process.env.YOBA_KEY },
+        { text: 'Stack', link: '/administration/stack?secretkey='+ process.env.YOBA_KEY },
+        { text: 'proExp', link: '/administration/pro_exp?secretkey='+ process.env.YOBA_KEY },
+        { text: 'Contact', link: '/administration/contact?secretkey='+ process.env.YOBA_KEY }
     ]
     return (
         <div className="flex min-h-screen w-full flex-col">
