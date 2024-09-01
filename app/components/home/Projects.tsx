@@ -1,7 +1,7 @@
 "use client"
 
 import { BiLinkExternal } from "react-icons/bi";
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getProjects } from '@/app/actions'
 import { Project } from '@/app/types/Project'
@@ -23,7 +23,7 @@ export default function Projects() {
                 <h1 className="text-2xl font-bold mb-3">Mes projets</h1>
                 <div className="flex flex-wrap gap-5">
                     {isPending && <><ProjectSkeleton /> <ProjectSkeleton /> <ProjectSkeleton /> </>}
-                    {data?.map((item: Project) => (
+                    {data?.filter((item) => item.visible).map((item: Project) => (
                         <div className='border rounded p-4 max-w-[350px] w-full flex flex-col gap-5 shadow-lg' key={item.id}>
                             <h1 className='font-semibold md:text-lg'> {item.title} </h1>
                             <p> {item.description} </p>
