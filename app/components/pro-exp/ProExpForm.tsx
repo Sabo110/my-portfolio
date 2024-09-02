@@ -40,7 +40,7 @@ export default function ProExpForm({ proExp }: { proExp?: ProExp }) {
         defaultValues: proExp ? {
             ogarnization_name: proExp.ogarnization_name,
             job_title: proExp.job_title,
-            description: proExp.description === null ? undefined: proExp.description,
+            description: proExp.description === null ? null: proExp.description,
             begin_date: proExp.begin_date,
             end_date: proExp.end_date,
             city: proExp.city,
